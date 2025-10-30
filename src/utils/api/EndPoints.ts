@@ -1,8 +1,5 @@
-export const endpoints = {
-  weather: {
-    current: "/current",
-    autocomplete: "/autocomplete",
-    historical: "/historical",
-    forecast: "/forecast",
+export const EndPoints = {
+  yourls: {
+    basic: "/yourls-api.php",
   },
 };
