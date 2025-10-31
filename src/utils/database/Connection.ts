@@ -6,5 +6,6 @@ export async function getConnection(): Promise<Connection> {
     user: "root",
     password: "root",
     database: "yourlsv1",
+    port: 8889,
   });
 }

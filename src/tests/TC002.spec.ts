@@ -1,57 +1,51 @@
-import { mergeTests } from "@playwright/test";
-import { expect } from "../fixtures/LogInPageFixture";
+import { mergeTests, expect } from "@playwright/test";
 import { test as loggedInTest } from "../fixtures/LoggedInPageFixture";
 import { test as dashboardPage } from "../fixtures/DashboardFixture";
-import data from "../utils/data/DataTest.json";
 import { ApiClient } from "../utils/api/ApiClient";
-import { config } from "../utils/config/config";
-import { DatabaseClient } from "../utils/database/dbClient";
 import { EndPoints } from "../utils/api/endpoints";
-import { RowDataPacket } from "mysql2/promise";
+import { getConnection } from "../utils/database/Connection";
+import { Connection, RowDataPacket } from "mysql2/promise";
 
 const test = mergeTests(loggedInTest, dashboardPage);
 
-test.describe("YOURLS End-to-End Tests create shortURL", () => {
-  let api: ApiClient;
-  let db: DatabaseClient;
+let connection: Connection;
+let api: ApiClient;
 
+test.describe("YOURLS - Edit Short URL", () => {
   test.beforeAll(async () => {
-    api = new ApiClient(config.apiBaseUrl);
+    api = new ApiClient("http://localhost:8080");
     await api.init();
-    db = new DatabaseClient();
-    await db.connect();
+    connection = await getConnection();
   });
 
-  for (const urls of data) {
-    test(`Short URL for ${urls.title} was created`, async ({
-      dashboardPage,
-      page,
-    }) => {
-      await dashboardPage.goTo();
-      await dashboardPage.fillURL(urls.url);
-      await dashboardPage.fillKeyword(urls.keyword);
-      await dashboardPage.clickCreateShortUrl();
+  test("TC002 - Edit short URL in UI and verify in API + DB", async ({
+    dashboardPage,
+  }) => {
+    await dashboardPage.goTo();
+    await dashboardPage.clickFirstRow();
+    await dashboardPage.clickEditButton();
+    await dashboardPage.fillNewKeyword("edited");
+    await dashboardPage.summitChanges();
+    const params = {
+      signature: "caed1384a5",
+      action: "expand",
+      shorturl: "edited",
+      format: "json",
+    };
 
-      const params = {
-        signature: "caed1384a5",
-        action: "expand",
-        shorturl: urls.keyword,
-        format: "json",
-      };
-      const response = await api.get(EndPoints.yourls.basic, params);
-      const responseData = await response.json();
-      expect(response.status(), "Status code").toBe(200);
-      const rows = (await db.query(
-        "SELECT keyword, url FROM yourls_url WHERE keyword = ?",
-        [urls.keyword]
-      )) as RowDataPacket[];
+    const response = await api.get(EndPoints.yourls.basic, params);
+    const responseData = await response.json();
+    console.log("API response data:", responseData);
+    expect(response.status(), "Status code").toBe(200);
+    const [rows] = await connection.execute<RowDataPacket[]>(
+      "SELECT * FROM yourls_url WHERE keyword = ?;",
+      ["edited"]
+    );
+    expect(rows.length).toBe(1);
+    console.log("Database rows:", rows);
+  });
 
-      expect(rows.length).toBe(1);
-      expect(rows[0].keyword).toBe(urls.keyword);
-      expect(rows[0].url).toBe(urls.url);
-    });
-  }
   test.afterAll(async () => {
-    if (db) await db.disconnect();
+    await connection.end();
   });
 });

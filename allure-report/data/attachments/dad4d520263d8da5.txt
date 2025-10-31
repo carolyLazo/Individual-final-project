@@ -1,0 +1,18 @@
+API response data: {
+  keyword: 'edited',
+  shorturl: 'http://localhost:8080/edited',
+  longurl: 'https://cat.quick.com.bo/el-bochita',
+  title: 'bochita',
+  message: 'success',
+  statusCode: '200'
+}
+Database rows: [
+  {
+    keyword: 'edited',
+    url: 'https://cat.quick.com.bo/el-bochita',
+    title: 'bochita',
+    timestamp: 2025-10-16T05:05:32.000Z,
+    ip: '::1',
+    clicks: 0
+  }
+]

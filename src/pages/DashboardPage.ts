@@ -27,4 +27,33 @@ export class DashboardPage {
   async clickSearchButton() {
     await this.page.locator(DashboardLocators.searchButton).click();
   }
+
+  async clickFirstRow() {
+    const hoverRow = await this.page
+      .locator(DashboardLocators.firstRow)
+      .first();
+    await hoverRow.hover();
+  }
+
+  async clickDeleteButton() {
+    await this.page.locator(DashboardLocators.deleteButton).dblclick();
+  }
+
+  async clickEditButton() {
+    await this.page.locator(DashboardLocators.editButton).click();
+  }
+
+  async fillNewKeyword(newKeyword: string) {
+    await this.page.locator(DashboardLocators.newKeyword).fill(newKeyword);
+  }
+  async summitChanges() {
+    await this.page.locator(DashboardLocators.summitChanges).click();
+  }
+
+  async clickRemoveConfirmationButton() {
+    await this.page.locator(DashboardLocators.removeConfirmationButton).click();
+  }
+  async getKeywordInTable() {
+    return await this.page.locator(DashboardLocators.keywordInList).innerText();
+  }
 }

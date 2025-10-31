@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","3590","Short ure for calendar was created","chromium","Thu Oct 30 21:36:00 BOT 2025","passed","Thu Oct 30 21:36:03 BOT 2025","YOURLS add shorturls","TC001.spec.ts","",""
+"","1992","Short ure for git was created","chromium","Thu Oct 30 21:36:04 BOT 2025","passed","Thu Oct 30 21:36:06 BOT 2025","YOURLS add shorturls","TC001.spec.ts","",""
+"","3385","Short ure for google was created","chromium","Thu Oct 30 21:36:00 BOT 2025","passed","Thu Oct 30 21:36:03 BOT 2025","YOURLS add shorturls","TC001.spec.ts","",""
+"","4702","TC002 - Edit short URL in UI and verify in API + DB","chromium","Thu Oct 30 21:36:00 BOT 2025","passed","Thu Oct 30 21:36:04 BOT 2025","YOURLS - Edit Short URL","TC002.spec.ts","",""
+"","1741","Short ure for miro was created","chromium","Thu Oct 30 21:36:04 BOT 2025","passed","Thu Oct 30 21:36:06 BOT 2025","YOURLS add shorturls","TC001.spec.ts","",""
+"","3305","Short ure for slack was created","chromium","Thu Oct 30 21:36:00 BOT 2025","passed","Thu Oct 30 21:36:03 BOT 2025","YOURLS add shorturls","TC001.spec.ts","",""
