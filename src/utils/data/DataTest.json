@@ -1,0 +1,27 @@
+[
+  {
+    "url": "https://calendar.google.com/calendar/u/0/r",
+    "keyword": "calendar",
+    "title": "calendar"
+  },
+  {
+    "url": "https://miro.com/",
+    "keyword": "miro",
+    "title": "miro"
+  },
+  {
+    "url": "https://www.google.com/",
+    "keyword": "google",
+    "title": "google"
+  },
+  {
+    "url": "https://github.com/",
+    "keyword": "git",
+    "title": "git"
+  },
+  {
+    "url": "https://slack.com/",
+    "keyword": "slack",
+    "title": "slack"
+  }
+]
